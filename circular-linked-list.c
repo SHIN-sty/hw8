@@ -274,7 +274,19 @@ int invertList(listNode* h) {
  *  리스트를 검색하여, 입력받은 key보다 큰값이 나오는 노드 바로 앞에 삽입 
  **/
 int insertNode(listNode* h, int key) {
-
+        listNode* newNode;
+	newNode = (listNode*)malloc(sizeof(listNode));
+	if(h -> rlink == NULL){
+		newNode -> rlink = NULL;
+		newNode -> llink = NULL;
+		h -> rlink = newNode;
+	}
+	else{
+		newNode -> rlink;
+		newNode -> llink;
+        if(newNode -> rlink != NULL)
+		newNode -> rlink -> llink = newNode;
+	}
 	return 0;
 }
 
