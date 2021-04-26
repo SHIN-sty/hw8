@@ -239,7 +239,7 @@ int insertFirst(listNode* h, int key) {
  * list의 첫번째 노드 삭제
  */
 int deleteFirst(listNode* h) {
-
+        free(h);
 
 	return 1;
 
