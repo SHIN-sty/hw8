@@ -170,7 +170,18 @@ void printList(listNode* h) {
  * list에 key에 대한 노드하나를 추가
  */
 int insertLast(listNode* h, int key) {
-
+        listNode* node;
+	listNode* temp;
+    node = (listNode*)malloc(sizeof(listNode));
+	node -> llink = NULL;
+	if(h -> rlink == NULL){
+	h -> rlink = node;
+	return 0;
+	}
+    temp = h -> rlink;
+	while(temp -> llink != NULL)
+	temp = temp -> llink;
+	temp -> llink = node;
 	return 1;
 }
 
