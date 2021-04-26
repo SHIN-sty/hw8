@@ -12,6 +12,7 @@
 
 #include<stdio.h>
 #include<stdlib.h>
+#include<string.h>
 /* 필요한 헤더파일 추가 */
 
 typedef struct Node {
@@ -122,7 +123,15 @@ int initialize(listNode** h) {
 
 /* 메모리 해제 */
 int freeList(listNode* h){
+        listNode* p = h->rlink;
 
+	listNode* prev = NULL;
+	while(p != NULL) {
+		prev = p;
+		p = p->llink;
+		free(prev);
+	}
+	free(h);
 	return 0;
 }
 
