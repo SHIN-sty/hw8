@@ -226,7 +226,11 @@ int deleteLast(listNode* h) {
  * list 처음에 key에 대한 노드하나를 추가
  */
 int insertFirst(listNode* h, int key) {
+        listNode* node = (listNode*)malloc(sizeof(listNode));
+	node->key = key;
 
+	node->llink = h->rlink;
+	h->rlink = node;
 
 	return 1;
 }
