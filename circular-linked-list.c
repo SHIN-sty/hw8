@@ -295,7 +295,7 @@ int insertNode(listNode* h, int key) {
  * list에서 key에 대한 노드 삭제
  */
 int deleteNode(listNode* h, int key) {
-
+        if(h -> rlink == NULL)
 	return 0;
 }
 
