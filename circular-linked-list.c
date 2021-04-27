@@ -17,7 +17,6 @@
 
 typedef struct Node {
 	int key;
-	char data[4];
 	struct Node* llink;
 	struct Node* rlink;
 } listNode;
@@ -182,18 +181,18 @@ void printList(listNode* h) {
  * list에 key에 대한 노드하나를 추가
  */
 int insertLast(listNode* h, int key) {
-    listNode* node;
-	listNode* temp;
-    node = (listNode*)malloc(sizeof(listNode));
-	node -> llink = NULL;
-	if(h -> rlink == NULL){
-	h -> rlink = node;
-	}
-    temp = h -> rlink;
-	while(temp -> llink != NULL)
-	temp = temp -> llink;
-	temp -> llink = node;
-	return 1;
+   listNode *node = (listNode *)malloc(sizeof(listNode));
+   node->key = key;
+   if (h == NULL) {
+   h = node;
+   node->rlink = h;
+   }
+   else {
+   node->llink = h->rlink; 
+   h->rlink = node; 
+   h = node; 
+   }
+	return 0;
 }
 
 
@@ -229,9 +228,15 @@ int deleteLast(listNode* h) {
 int insertFirst(listNode* h, int key) {
     listNode* node = (listNode*)malloc(sizeof(listNode));
 	node->key = key;
-
-	node->llink = h->rlink;
-	h->rlink = node;
+    
+	if(h == NULL){
+		h = node;
+		node -> rlink = h;
+	}
+	else{
+		node -> rlink = h -> rlink;
+		h -> rlink = node;
+	}
 	return 1;
 }
 
@@ -275,19 +280,11 @@ int invertList(listNode* h) {
  *  리스트를 검색하여, 입력받은 key보다 큰값이 나오는 노드 바로 앞에 삽입 
  **/
 int insertNode(listNode* h, int key) {
-    listNode* newNode;
-	newNode = (listNode*)malloc(sizeof(listNode));
-	if(h -> rlink == NULL){
-		newNode -> rlink = NULL;
-		newNode -> llink = NULL;
-		h -> rlink = newNode;
-	}
-	else{
-		newNode -> rlink;
-		newNode -> llink;
-        if(newNode -> rlink != NULL)
-		newNode -> rlink -> llink = newNode;
-	}
+    listNode* node;
+    h -> llink = node;
+	h -> rlink = node -> rlink;
+	node -> rlink -> llink = h;
+	node -> rlink = h;
 	return 0;
 }
 
@@ -307,7 +304,7 @@ int deleteNode(listNode* h, int key) {
 		pre = pre -> llink;
 	}
 	pre -> llink;
-	h -> rlink;
+	h -> rlink; 
 	return 0;
 }
 
