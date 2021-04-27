@@ -295,7 +295,17 @@ int insertNode(listNode* h, int key) {
  * list에서 key에 대한 노드 삭제
  */
 int deleteNode(listNode* h, int key) {
-        if(h -> rlink == NULL)
+        	listNode* pre;
+    if(h -> rlink == NULL)
+	if(h -> rlink -> llink == NULL){
+		free(h -> rlink);
+		h -> rlink = NULL;
+	}
+	else {
+		pre = h -> rlink;
+		pre = pre -> llink;
+	}
+	pre -> llink;
 	return 0;
 }
 
