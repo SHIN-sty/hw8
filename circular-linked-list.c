@@ -17,6 +17,7 @@
 
 typedef struct Node {
 	int key;
+	char data[4];
 	struct Node* llink;
 	struct Node* rlink;
 } listNode;
@@ -53,7 +54,9 @@ int main()
 		printf(" Insert First  = f           Delete First  = t\n");
 		printf(" Invert List   = r           Quit          = q\n");
 		printf("----------------------------------------------------------------\n");
-
+        
+		printf("성명: 신태양\n");
+		printf("학번: 2017038096\n");
 		printf("Command = ");
 		scanf(" %c", &command);
 
@@ -123,7 +126,7 @@ int initialize(listNode** h) {
 
 /* 메모리 해제 */
 int freeList(listNode* h){
-        listNode* p = h->rlink;
+	listNode* p = h->rlink;
 
 	listNode* prev = NULL;
 	while(p != NULL) {
@@ -179,13 +182,12 @@ void printList(listNode* h) {
  * list에 key에 대한 노드하나를 추가
  */
 int insertLast(listNode* h, int key) {
-        listNode* node;
+    listNode* node;
 	listNode* temp;
     node = (listNode*)malloc(sizeof(listNode));
 	node -> llink = NULL;
 	if(h -> rlink == NULL){
 	h -> rlink = node;
-	return 0;
 	}
     temp = h -> rlink;
 	while(temp -> llink != NULL)
@@ -199,15 +201,14 @@ int insertLast(listNode* h, int key) {
  * list의 마지막 노드 삭제
  */
 int deleteLast(listNode* h) {
-        listNode* prevNode;
+    listNode* prevNode;
     listNode* delNode;
 	if(h -> rlink == NULL) return 0;
 	if(h -> rlink -> llink == NULL) {
 		free(h -> rlink);
 		h -> rlink = NULL;
-	return 0;
 	}
-	 else {               
+	 else {                //리스트에 노드가 2개 이상인 경우
         prevNode = h -> rlink;
         delNode = h -> rlink -> llink;
         while(delNode -> llink != NULL) {
@@ -226,12 +227,11 @@ int deleteLast(listNode* h) {
  * list 처음에 key에 대한 노드하나를 추가
  */
 int insertFirst(listNode* h, int key) {
-        listNode* node = (listNode*)malloc(sizeof(listNode));
+    listNode* node = (listNode*)malloc(sizeof(listNode));
 	node->key = key;
 
 	node->llink = h->rlink;
 	h->rlink = node;
-
 	return 1;
 }
 
@@ -239,7 +239,7 @@ int insertFirst(listNode* h, int key) {
  * list의 첫번째 노드 삭제
  */
 int deleteFirst(listNode* h) {
-        free(h);
+    free(h);
 
 	return 1;
 
@@ -250,7 +250,7 @@ int deleteFirst(listNode* h) {
  * 리스트의 링크를 역순으로 재 배치
  */
 int invertList(listNode* h) {
-        listNode* p;
+    listNode* p;
 	listNode* q;
 	listNode* r;
 
@@ -265,7 +265,8 @@ int invertList(listNode* h) {
 		q -> llink = r;
 	}
 	h -> rlink = q;
-        return 0;
+
+	return 0;
 }
 
 
@@ -274,7 +275,7 @@ int invertList(listNode* h) {
  *  리스트를 검색하여, 입력받은 key보다 큰값이 나오는 노드 바로 앞에 삽입 
  **/
 int insertNode(listNode* h, int key) {
-        listNode* newNode;
+    listNode* newNode;
 	newNode = (listNode*)malloc(sizeof(listNode));
 	if(h -> rlink == NULL){
 		newNode -> rlink = NULL;
@@ -295,7 +296,7 @@ int insertNode(listNode* h, int key) {
  * list에서 key에 대한 노드 삭제
  */
 int deleteNode(listNode* h, int key) {
-        	listNode* pre;
+	listNode* pre;
     if(h -> rlink == NULL)
 	if(h -> rlink -> llink == NULL){
 		free(h -> rlink);
