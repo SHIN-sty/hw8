@@ -307,6 +307,7 @@ int deleteNode(listNode* h, int key) {
 		pre = pre -> llink;
 	}
 	pre -> llink;
+	h -> rlink;
 	return 0;
 }
 
