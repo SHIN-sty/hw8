@@ -280,32 +280,69 @@ int invertList(listNode* h) {
  *  리스트를 검색하여, 입력받은 key보다 큰값이 나오는 노드 바로 앞에 삽입 
  **/
 int insertNode(listNode* h, int key) {
-    listNode* node;
-    h -> llink = node;
-	h -> rlink = node -> rlink;
-	node -> rlink -> llink = h;
-	node -> rlink = h;
-	return 0;
-}
+    struct Node *new_node;
+    struct Node *prev, *p;
 
+    struct Node *new_node = (new_node)malloc(sizeof(*new_node));
+
+    prev = h;
+
+    p = h->llink;
+
+    new_node->key = key;
+    while (p) {
+
+        if (p->key > new_node->key) {
+
+            break;
+
+        }
+        prev = prev->llink;
+
+        p = p->llink;
+
+    }
+
+    new_node->llink = p;
+
+    prev->llink = new_node;
+}
 
 /**
  * list에서 key에 대한 노드 삭제
  */
 int deleteNode(listNode* h, int key) {
-	listNode* pre;
-    if(h -> rlink == NULL)
-	if(h -> rlink -> llink == NULL){
-		free(h -> rlink);
-		h -> rlink = NULL;
-	}
-	else {
-		pre = h -> rlink;
-		pre = pre -> llink;
-	}
-	pre -> llink;
-	h -> rlink; 
-	return 0;
+	struct Node *p, *prev;
+
+    int delkey = 0;
+
+    prev = h;
+
+    p = h->llink;
+
+    while (p) {
+
+        if(p->key == key){
+
+            prev->llink = p->llink;
+
+            free(p);
+
+            delkey = key;
+
+            break;
+
+        }
+
+        prev = prev->llink;
+
+        p = p->llink;
+
+    }
+
+    return delkey;
+
 }
+
 
 
